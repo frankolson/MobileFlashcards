@@ -8,7 +8,7 @@ import { Constants } from 'expo';
 
 // Project Assets
 import DecksContainer from './containers/DecksContainer';
-import NewDeck from './components/NewDeck';
+import NewDeckContainer from './containers/NewDeckContainer';
 import reducers from './reducers';
 
 const FlashcardStatusBar = props => (
@@ -22,7 +22,7 @@ const Tabs = TabNavigator({
     screen: DecksContainer,
   },
   NewDeck: {
-    screen: NewDeck,
+    screen: NewDeckContainer,
     navigationOptions: {
       tabBarLabel: 'New Deck',
     },
