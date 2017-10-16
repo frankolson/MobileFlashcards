@@ -1,10 +1,84 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { Component } from 'react';
+import {
+  KeyboardAvoidingView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 
-const NewDeck = () => (
-  <View>
-    <Text>NewDeck View</Text>
-  </View>
-);
+const styles = StyleSheet.create({
+  button: {
+    padding: 10,
+    alignSelf: 'center',
+    borderRadius: 5,
+    margin: 10,
+  },
+  buttonText: {
+    fontSize: 20,
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  input: {
+    width: 300,
+    height: 44,
+    padding: 8,
+    borderWidth: 1,
+    borderRadius: 7,
+    margin: 10,
+  },
+});
+
+class NewDeck extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      title: '',
+    };
+
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleTitleChange(title) {
+    this.setState({
+      title,
+    });
+  }
+
+  handleSubmit() {
+    console.log(this.state);
+
+    // update store
+
+    // update redux
+
+    // navigate to new deck (with decks as the fallback stack)
+  }
+
+  render() {
+    return (
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <Text>
+          What is the title of your new deck?
+        </Text>
+
+        <TextInput
+          onChangeText={this.handleTitleChange}
+          style={styles.input}
+          value={this.state.title}
+        />
+
+        <TouchableOpacity onPress={this.handleSubmit} style={styles.button}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
+    );
+  }
+}
 
 export default NewDeck;
