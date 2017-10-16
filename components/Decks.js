@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 
-class Decks extends Component {
-  render() {
-    return (
-      <View>
-        <Text>Decks View</Text>
-      </View>
-    );
-  }
-};
+const Decks = () => (
+  <View>
+    <Text>Decks View</Text>
+  </View>
+);
 
 export default Decks;

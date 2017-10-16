@@ -3,5 +3,8 @@
   "extends": ["airbnb", "plugin:react-native/all"],
   "plugins": [
       "react-native"
-  ]
+  ],
+  "rules": {
+    "react/jsx-filename-extension": "off"
+  }
 }

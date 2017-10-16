@@ -1,6 +1,6 @@
 // Vendor Assets
 import React from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, StyleSheet } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import { Constants } from 'expo';
 
@@ -26,15 +26,17 @@ const Tabs = TabNavigator({
   },
 });
 
-class App extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <FlashcardStatusBar barStyle="light-content" />
-        <Tabs />
-      </View>
-    );
-  }
-}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
+
+const App = () => (
+  <View style={styles.container}>
+    <FlashcardStatusBar barStyle="light-content" />
+    <Tabs />
+  </View>
+);
 
 export default App;
