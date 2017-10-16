@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 
 // Project Assets
 import NewDeck from '../components/NewDeck';
-import { addDeck } from '../actions';
-import { saveDeckTitle } from '../utils/api';
+import { receiveDecks } from '../actions';
+import { getDecks, saveDeckTitle } from '../utils/api';
 
-const mapDispatchToProps = dispatch => ({
-  addDeck: data => dispatch(addDeck(data)),
+const mapDispatchToProps = () => ({
+  getDecks,
+  receiveDecks,
   saveDeckTitle,
 });
 

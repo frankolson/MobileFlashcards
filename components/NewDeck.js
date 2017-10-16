@@ -1,4 +1,8 @@
+// Vendor Assets
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+// Project assets
 import {
   KeyboardAvoidingView,
   Text,
@@ -6,6 +10,12 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+
+const propTypes = {
+  getDecks: PropTypes.func.isRequired,
+  receiveDecks: PropTypes.func.isRequired,
+  saveDeckTitle: PropTypes.func.isRequired,
+};
 
 const styles = StyleSheet.create({
   button: {
@@ -51,11 +61,10 @@ class NewDeck extends Component {
   }
 
   handleSubmit() {
-    console.log(this.state);
-
-    // update store
-
-    // update redux
+    this.props.saveDeckTitle(this.state.title)
+      .then(this.props.getDecks().then(results => (
+        this.props.receiveDecks(results)
+      )));
 
     // navigate to new deck (with decks as the fallback stack)
   }
@@ -80,5 +89,7 @@ class NewDeck extends Component {
     );
   }
 }
+
+NewDeck.propTypes = propTypes;
 
 export default NewDeck;
