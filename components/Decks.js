@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 // Project Assets
 import { getDecks } from '../utils/api';
+import NoResults from './NoResults';
 
 const propTypes = {
   /* eslint-disable react/forbid-prop-types */
@@ -24,6 +25,12 @@ class Decks extends Component {
   }
 
   render() {
+    const { decks } = this.props;
+
+    if (!decks || Object.keys(decks).length === 0) {
+      return <NoResults />;
+    }
+
     return (
       <View>
         <Text>Decks View</Text>
