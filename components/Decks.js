@@ -1,6 +1,6 @@
 // Vendor Assets
 import React, { Component } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 // Project Assets

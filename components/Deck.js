@@ -1,8 +1,10 @@
 // Vendor Assets
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { View, Text, StyleSheet } from 'react-native';
+
+// Project Assets
+import { grey, white } from '../utils/colors';
 
 const propTypes = {
   count: PropTypes.number.isRequired,
@@ -12,6 +14,10 @@ const propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: white,
+    borderColor: grey,
+    borderRadius: 4,
+    borderWidth: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 30,

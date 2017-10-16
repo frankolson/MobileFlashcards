@@ -10,6 +10,7 @@ import { Constants } from 'expo';
 import DecksContainer from './containers/DecksContainer';
 import NewDeckContainer from './containers/NewDeckContainer';
 import reducers from './reducers';
+import { lightGrey } from './utils/colors';
 
 const FlashcardStatusBar = props => (
   <View style={{ height: Constants.statusBarHeight }}>
@@ -32,6 +33,7 @@ const Tabs = TabNavigator({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: lightGrey,
   },
 });
 
