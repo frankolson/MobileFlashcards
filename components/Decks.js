@@ -1,10 +1,32 @@
-import React from 'react';
+// Vendor Assets
+import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
 
-const Decks = () => (
-  <View>
-    <Text>Decks View</Text>
-  </View>
-);
+// Project Assets
+import { receiveDecks } from '../actions';
+import { getDecks } from '../utils/api';
 
-export default Decks;
+class Decks extends Component {
+  componentWillMount() {
+    const { dispatch } = this.props;
+
+    getDecks()
+      .then(decks => dispatch(receiveDecks(decks)));
+  }
+
+  render() {
+    return (
+      <View>
+        <Text>Decks View</Text>
+        <Text>{JSON.stringify(this.props.decks)}</Text>
+      </View>
+    );
+  }
+}
+
+const mapStateToProps = ({ decks }) => ({
+  decks,
+});
+
+export default connect(mapStateToProps)(Decks);
