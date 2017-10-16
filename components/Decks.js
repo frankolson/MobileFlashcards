@@ -4,13 +4,13 @@ import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 // Project Assets
-import { getDecks } from '../utils/api';
 import NoResults from './NoResults';
 
 const propTypes = {
   /* eslint-disable react/forbid-prop-types */
   decks: PropTypes.object,
   /* eslint-enable react/forbid-prop-types */
+  getDecks: PropTypes.func.isRequired,
   receiveDecks: PropTypes.func.isRequired,
 };
 
@@ -20,7 +20,7 @@ const defaultProps = {
 
 class Decks extends Component {
   componentWillMount() {
-    getDecks()
+    this.props.getDecks()
       .then(decks => this.props.receiveDecks(decks));
   }
 
