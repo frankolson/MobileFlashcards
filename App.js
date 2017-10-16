@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { Constants } from 'expo';
 
 // Project Assets
-import Decks from './components/Decks';
+import DecksContainer from './containers/DecksContainer';
 import NewDeck from './components/NewDeck';
 import reducers from './reducers';
 
@@ -19,7 +19,7 @@ const FlashcardStatusBar = props => (
 
 const Tabs = TabNavigator({
   Decks: {
-    screen: Decks,
+    screen: DecksContainer,
   },
   NewDeck: {
     screen: NewDeck,

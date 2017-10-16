@@ -1,18 +1,16 @@
 // Vendor Assets
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Project Assets
-import { receiveDecks } from '../actions';
 import { getDecks } from '../utils/api';
 
 const propTypes = {
   /* eslint-disable react/forbid-prop-types */
   decks: PropTypes.object,
   /* eslint-enable react/forbid-prop-types */
-  dispatch: PropTypes.func.isRequired,
+  receiveDecks: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -21,10 +19,8 @@ const defaultProps = {
 
 class Decks extends Component {
   componentWillMount() {
-    const { dispatch } = this.props;
-
     getDecks()
-      .then(decks => dispatch(receiveDecks(decks)));
+      .then(decks => this.props.receiveDecks(decks));
   }
 
   render() {
@@ -40,8 +36,4 @@ class Decks extends Component {
 Decks.propTypes = propTypes;
 Decks.defaultProps = defaultProps;
 
-const mapStateToProps = ({ decks }) => ({
-  decks,
-});
-
-export default connect(mapStateToProps)(Decks);
+export default Decks;
