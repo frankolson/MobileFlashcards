@@ -1,9 +1,10 @@
 // Vendor Assets
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 // Project Assets
+import Deck from './Deck';
 import NoResults from './NoResults';
 
 const propTypes = {
@@ -40,12 +41,16 @@ class Decks extends Component {
 
     return (
       <View>
-        <Text>Decks View</Text>
-        <Text>
-          {decks.map(deck => (
-            JSON.stringify(deck, null, 2)
-          ))}
-        </Text>
+        <FlatList
+          data={decks}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <Deck
+              count={item.questions.length}
+              title={item.title}
+            />
+          )}
+        />
       </View>
     );
   }

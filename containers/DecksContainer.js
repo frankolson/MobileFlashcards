@@ -7,7 +7,7 @@ import { receiveDecks } from '../actions';
 import { getDecks } from '../utils/api';
 
 const mapStateToProps = ({ decks }) => ({
-  decks: Object.keys(decks).map(id => ({
+  decks: Object.keys(decks || {}).map(id => ({
     ...decks[id],
     id,
   })),
