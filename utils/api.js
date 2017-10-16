@@ -5,10 +5,13 @@ const FLASHCARD_STORAGE_KEY = 'MobileFlashcards:data';
 
 export const getDecks = () => (
   AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
+    .then(results => JSON.parse(results))
 );
 
 export const getDeck = key => (
-  getDecks().then(results => results[key])
+  getDecks()
+    .then(results => JSON.parse(results))
+    .then(results => results[key])
 );
 
 export const saveDeckTitle = title => (
