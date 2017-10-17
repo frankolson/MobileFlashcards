@@ -10,8 +10,15 @@ export const getDecks = () => (
 
 export const getDeck = key => (
   getDecks()
-    .then(results => JSON.parse(results))
-    .then(results => results[key])
+    .then((results) => {
+      if (typeof results[key] !== 'undefined') {
+        return {
+          ...results[key],
+          id: key,
+        };
+      }
+      return undefined;
+    })
 );
 
 export const saveDeckTitle = title => (

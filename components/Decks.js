@@ -1,6 +1,6 @@
 // Vendor Assets
 import React, { Component } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 // Project Assets
@@ -8,7 +8,6 @@ import Deck from './Deck';
 import NoResults from './NoResults';
 
 const propTypes = {
-  /* eslint-disable react/forbid-prop-types */
   decks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -17,8 +16,9 @@ const propTypes = {
       answer: PropTypes.string.isRequired,
     })).isRequired,
   })),
-  /* eslint-enable react/forbid-prop-types */
+  getDeck: PropTypes.func.isRequired,
   getDecks: PropTypes.func.isRequired,
+  goToDeck: PropTypes.func.isRequired,
   receiveDecks: PropTypes.func.isRequired,
 };
 
@@ -30,6 +30,11 @@ class Decks extends Component {
   componentWillMount() {
     this.props.getDecks()
       .then(decks => this.props.receiveDecks(decks));
+  }
+
+  handleCardPress(id) {
+    this.props.getDeck(id)
+      .then(deck => this.props.goToDeck(deck));
   }
 
   render() {
@@ -45,10 +50,12 @@ class Decks extends Component {
           data={decks}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <Deck
-              count={item.questions.length}
-              title={item.title}
-            />
+            <TouchableOpacity onPress={() => this.handleCardPress(item.id)}>
+              <Deck
+                count={item.questions.length}
+                title={item.title}
+              />
+            </TouchableOpacity>
           )}
         />
       </View>

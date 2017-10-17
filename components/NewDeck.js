@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { black } from '../utils/colors';
 
 const propTypes = {
   getDecks: PropTypes.func.isRequired,
@@ -22,8 +23,10 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     alignSelf: 'center',
-    borderRadius: 5,
     margin: 10,
+    borderColor: black,
+    borderWidth: 1,
+    borderRadius: 5,
   },
   buttonText: {
     fontSize: 20,

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // Project Assets
 import Decks from '../components/Decks';
 import { receiveDecks } from '../actions';
-import { getDecks } from '../utils/api';
+import { getDeck, getDecks } from '../utils/api';
 
 const mapStateToProps = ({ decks }) => ({
   decks: Object.keys(decks || {}).map(id => ({
@@ -13,8 +13,10 @@ const mapStateToProps = ({ decks }) => ({
   })),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, { navigation }) => ({
+  getDeck,
   getDecks,
+  goToDeck: data => navigation.navigate('DeckMenu', data),
   receiveDecks: data => dispatch(receiveDecks(data)),
 });
 

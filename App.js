@@ -1,7 +1,7 @@
 // Vendor Assets
 import React from 'react';
 import { View, StatusBar, StyleSheet } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { Constants } from 'expo';
@@ -9,6 +9,7 @@ import { Constants } from 'expo';
 // Project Assets
 import DecksContainer from './containers/DecksContainer';
 import NewDeckContainer from './containers/NewDeckContainer';
+import DeckMenu from './components/DeckMenu';
 import reducers from './reducers';
 import { lightGrey } from './utils/colors';
 
@@ -30,6 +31,15 @@ const Tabs = TabNavigator({
   },
 });
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  DeckMenu: {
+    screen: DeckMenu,
+  },
+});
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -41,7 +51,7 @@ const App = () => (
   <Provider store={createStore(reducers)}>
     <View style={styles.container}>
       <FlashcardStatusBar barStyle="light-content" />
-      <Tabs />
+      <MainNavigator />
     </View>
   </Provider>
 );
