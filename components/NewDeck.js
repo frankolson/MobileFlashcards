@@ -13,6 +13,7 @@ import {
 
 const propTypes = {
   getDecks: PropTypes.func.isRequired,
+  goHome: PropTypes.func.isRequired,
   receiveDecks: PropTypes.func.isRequired,
   saveDeckTitle: PropTypes.func.isRequired,
 };
@@ -66,7 +67,7 @@ class NewDeck extends Component {
         this.props.receiveDecks(results)
       )));
 
-    // navigate to new deck (with decks as the fallback stack)
+    this.props.goHome();
   }
 
   render() {
