@@ -11,7 +11,7 @@ const propTypes = {
   decks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    questions: PropTypes.arrayOf(PropTypes.shape({
+    cards: PropTypes.arrayOf(PropTypes.shape({
       question: PropTypes.string.isRequired,
       answer: PropTypes.string.isRequired,
     })).isRequired,
@@ -52,7 +52,7 @@ class Decks extends Component {
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => this.handleCardPress(item.id)}>
               <Deck
-                count={item.questions.length}
+                count={item.cards.length}
                 title={item.title}
               />
             </TouchableOpacity>

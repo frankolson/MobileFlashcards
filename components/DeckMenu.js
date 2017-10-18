@@ -49,11 +49,11 @@ class DeckMenu extends Component {
   }
 
   render() {
-    const { questions, title } = this.props.navigation.state.params;
+    const { cards, title } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
         <Deck
-          count={questions.length}
+          count={cards.length}
           title={title}
         />
 
