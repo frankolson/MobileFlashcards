@@ -5,6 +5,7 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { Constants } from 'expo';
+import devToolsEnhancer from 'remote-redux-devtools';
 
 // Project Assets
 import DecksContainer from './containers/DecksContainer';
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
 });
 
 const App = () => (
-  <Provider store={createStore(reducers)}>
+  <Provider store={createStore(reducers, devToolsEnhancer())}>
     <View style={styles.container}>
       <FlashcardStatusBar barStyle="light-content" />
       <MainNavigator />
