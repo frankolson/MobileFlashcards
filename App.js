@@ -8,6 +8,7 @@ import { Constants } from 'expo';
 
 // Project Assets
 import DecksContainer from './containers/DecksContainer';
+import NewCardContainer from './containers/NewCardContainer';
 import NewDeckContainer from './containers/NewDeckContainer';
 import DeckMenu from './components/DeckMenu';
 import reducers from './reducers';
@@ -37,6 +38,9 @@ const MainNavigator = StackNavigator({
   },
   DeckMenu: {
     screen: DeckMenu,
+  },
+  NewCard: {
+    screen: NewCardContainer,
   },
 });
 

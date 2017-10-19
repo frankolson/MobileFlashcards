@@ -30,11 +30,13 @@ export const saveDeckTitle = title => (
   }))
 );
 
-export const addCardToDeck = (id, card) => {
-  const deck = { ...getDeck(id) };
-  deck.cards.push(card);
+export const addCardToDeck = (id, card) => (
+  getDeck(id)
+    .then((deck) => {
+      deck.cards.push(card);
 
-  return AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, JSON.stringify({
-    [id]: { ...deck },
-  }));
-};
+      return AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, JSON.stringify({
+        [id]: { ...deck },
+      }));
+    })
+);

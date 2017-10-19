@@ -8,7 +8,10 @@ import Deck from './Deck';
 import { black } from '../utils/colors';
 
 const propTypes = {
-  navigation: PropTypes.object.isRequired,
+  navigation: PropTypes.shape({
+    state: PropTypes.shape.isRequired,
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -41,6 +44,13 @@ class DeckMenu extends Component {
   }
 
   handleAddCard() {
+    this.props.navigation.navigate(
+      'NewCard',
+      {
+        id: this.props.navigation.state.params.id,
+        title: 'Add a card'
+      },
+    );
     console.log(this.props.navigation.state.params.title);
   }
 

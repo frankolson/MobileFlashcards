@@ -14,8 +14,9 @@ import { black } from '../utils/colors';
 
 const propTypes = {
   addCardToDeck: PropTypes.func.isRequired,
+  deckId: PropTypes.string.isRequired,
   getDecks: PropTypes.func.isRequired,
-  navigation: PropTypes.shape.isRequired,
+  goBack: PropTypes.func.isRequired,
   receiveDecks: PropTypes.func.isRequired,
 };
 
@@ -66,27 +67,28 @@ class NewDeck extends Component {
   }
 
   handleSubmit() {
-    const { id } = this.props.navigation.state.params;
-    this.props.addCardToDeck(id, this.state)
-      .then(this.props.getDecks().then(results => (
-        this.props.receiveDecks(results)
-      )));
+    const { deckId } = this.props;
+    this.props.addCardToDeck(deckId, this.state)
+      .then(this.props.getDecks().then((results) => {
+        console.log("got here", results);
+        return this.props.receiveDecks(results);
+      }));
 
-    this.props.navigation.goBack();
+    this.props.goBack();
   }
 
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <TextInput
-          onChangeText={this.handleChange}
+          onChangeText={input => this.handleChange('question', input)}
           placeholder="Question"
           style={styles.input}
           value={this.state.question}
         />
 
         <TextInput
-          onChangeText={this.handleChange}
+          onChangeText={input => this.handleChange('answer', input)}
           placeholder="Answer"
           style={styles.input}
           value={this.state.answer}
