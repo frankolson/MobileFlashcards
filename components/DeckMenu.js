@@ -48,10 +48,9 @@ class DeckMenu extends Component {
       'NewCard',
       {
         id: this.props.navigation.state.params.id,
-        title: 'Add a card'
+        title: 'Add a card',
       },
     );
-    console.log(this.props.navigation.state.params.title);
   }
 
   handleStart() {
