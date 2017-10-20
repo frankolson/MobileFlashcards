@@ -31,12 +31,9 @@ export const saveDeckTitle = title => (
 );
 
 export const addCardToDeck = (id, card) => (
-  getDeck(id)
-    .then((deck) => {
-      deck.cards.push(card);
-
-      return AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, JSON.stringify({
-        [id]: { ...deck },
-      }));
+  getDecks()
+    .then((decks) => {
+      decks[id].cards.push(card);
+      return AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, JSON.stringify(decks));
     })
 );
