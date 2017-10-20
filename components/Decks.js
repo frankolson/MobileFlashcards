@@ -44,8 +44,6 @@ class Decks extends Component {
       return <NoResults />;
     }
 
-    console.log(decks);
-
     return (
       <View>
         <FlatList
