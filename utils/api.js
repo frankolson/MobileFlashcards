@@ -1,5 +1,4 @@
 import { AsyncStorage } from 'react-native';
-import uuidv4 from 'uuid/v4';
 
 const FLASHCARD_STORAGE_KEY = 'MobileFlashcards:data';
 
@@ -21,9 +20,9 @@ export const getDeck = key => (
     })
 );
 
-export const saveDeckTitle = title => (
+export const saveDeck = (id, title) => (
   AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, JSON.stringify({
-    [uuidv4()]: {
+    [id]: {
       title,
       cards: [],
     },

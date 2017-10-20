@@ -1,6 +1,7 @@
 // Vendor Assets
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import uuidv4 from 'uuid/v4';
 
 // Project assets
 import {
@@ -13,10 +14,9 @@ import {
 import { black } from '../utils/colors';
 
 const propTypes = {
-  getDecks: PropTypes.func.isRequired,
   goHome: PropTypes.func.isRequired,
-  receiveDecks: PropTypes.func.isRequired,
-  saveDeckTitle: PropTypes.func.isRequired,
+  addDeck: PropTypes.func.isRequired,
+  saveDeck: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -65,11 +65,13 @@ class NewDeck extends Component {
   }
 
   handleSubmit() {
-    this.props.saveDeckTitle(this.state.title)
-      .then(this.props.getDecks().then(results => (
-        this.props.receiveDecks(results)
-      )));
-
+    const id = uuidv4();
+    this.props.saveDeck(id, this.state.title);
+    this.props.addDeck({
+      cards: [],
+      id,
+      title: this.state.title,
+    });
     this.props.goHome();
   }
 
