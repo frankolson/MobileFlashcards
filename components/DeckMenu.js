@@ -48,7 +48,7 @@ class DeckMenu extends Component {
     this.props.navigate({
       routeName: 'NewCard',
       params: {
-        id: this.props.deck.id,
+        deck: this.props.deck,
         title: 'Add a card',
       },
     });

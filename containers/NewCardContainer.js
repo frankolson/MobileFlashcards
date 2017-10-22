@@ -6,8 +6,11 @@ import NewCard from '../components/NewCard';
 import { updateDeck } from '../actions';
 import { addCardToDeck } from '../utils/api';
 
-const mapStateToProps = (state, { navigation }) => ({
-  deck: state.decks[navigation.state.params.deck.id],
+const mapStateToProps = ({ decks }, { navigation }) => ({
+  deck: {
+    ...decks[navigation.state.params.deck.id],
+    id: navigation.state.params.deck.id,
+  },
 });
 
 const mapDispatchToProps = (dispatch, { navigation }) => ({
