@@ -8,10 +8,15 @@ import Deck from './Deck';
 import { black } from '../utils/colors';
 
 const propTypes = {
-  navigation: PropTypes.shape({
-    state: PropTypes.shape.isRequired,
-    navigate: PropTypes.func.isRequired,
+  deck: PropTypes.shape({
+    cards: PropTypes.arrayOf(PropTypes.shape({
+      answer: PropTypes.string.isRequired,
+      question: PropTypes.string.isRequired,
+    })).isRequired,
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
   }).isRequired,
+  navigate: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -32,10 +37,6 @@ const styles = StyleSheet.create({
 });
 
 class DeckMenu extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.title,
-  });
-
   constructor(props) {
     super(props);
 
@@ -44,21 +45,22 @@ class DeckMenu extends Component {
   }
 
   handleAddCard() {
-    this.props.navigation.navigate(
-      'NewCard',
-      {
-        id: this.props.navigation.state.params.id,
+    this.props.navigate({
+      routeName: 'NewCard',
+      params: {
+        id: this.props.deck.id,
         title: 'Add a card',
       },
-    );
+    });
   }
 
   handleStart() {
-    console.log(this.props.navigation.state.params.title);
+    console.log(this.props.deck.title);
   }
 
   render() {
-    const { cards, title } = this.props.navigation.state.params;
+    const { cards, title } = this.props.deck;
+
     return (
       <View style={styles.container}>
         <Deck

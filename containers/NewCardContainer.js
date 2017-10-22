@@ -3,18 +3,17 @@ import { connect } from 'react-redux';
 
 // Project Assets
 import NewCard from '../components/NewCard';
-import { receiveDecks } from '../actions';
-import { addCardToDeck, getDecks } from '../utils/api';
+import { updateDeck } from '../actions';
+import { addCardToDeck } from '../utils/api';
 
 const mapStateToProps = (state, { navigation }) => ({
-  deckId: navigation.state.params.id,
+  deck: state.decks[navigation.state.params.deck.id],
 });
 
 const mapDispatchToProps = (dispatch, { navigation }) => ({
   addCardToDeck,
-  getDecks,
   goBack: () => navigation.goBack(),
-  receiveDecks: data => dispatch(receiveDecks(data)),
+  updateDeck: data => dispatch(updateDeck(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewCard);

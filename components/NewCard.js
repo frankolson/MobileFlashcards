@@ -14,10 +14,16 @@ import { black } from '../utils/colors';
 
 const propTypes = {
   addCardToDeck: PropTypes.func.isRequired,
-  deckId: PropTypes.string.isRequired,
-  getDecks: PropTypes.func.isRequired,
+  deck: PropTypes.shape({
+    cards: PropTypes.arrayOf(PropTypes.shape({
+      answer: PropTypes.string.isRequired,
+      question: PropTypes.string.isRequired,
+    })).isRequired,
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
   goBack: PropTypes.func.isRequired,
-  receiveDecks: PropTypes.func.isRequired,
+  updateDeck: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -67,12 +73,13 @@ class NewDeck extends Component {
   }
 
   handleSubmit() {
-    const { deckId } = this.props;
-    this.props.addCardToDeck(deckId, this.state)
-      .then(this.props.getDecks().then((results) => {
-        console.log("got here", results);
-        return this.props.receiveDecks(results);
-      }));
+    const { cards, id, title } = this.props.deck;
+    this.props.addCardToDeck(id, this.state);
+    this.props.updateDeck({
+      id,
+      cards: [...cards, this.state],
+      title,
+    });
 
     this.props.goBack();
   }

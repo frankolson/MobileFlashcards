@@ -1,6 +1,6 @@
 // Vendor Assets
 import React, { Component } from 'react';
-import { FlatList, View, TouchableOpacity } from 'react-native';
+import { FlatList, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 // Project Assets
@@ -16,9 +16,8 @@ const propTypes = {
       answer: PropTypes.string.isRequired,
     })).isRequired,
   })),
-  getDeck: PropTypes.func.isRequired,
   getDecks: PropTypes.func.isRequired,
-  goToDeck: PropTypes.func.isRequired,
+  navigate: PropTypes.func.isRequired,
   receiveDecks: PropTypes.func.isRequired,
 };
 
@@ -27,14 +26,22 @@ const defaultProps = {
 };
 
 class Decks extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleOnPress = this.handleOnPress.bind(this);
+  }
+
   componentWillMount() {
     this.props.getDecks()
       .then(decks => this.props.receiveDecks(decks));
   }
 
-  handleCardPress(id) {
-    this.props.getDeck(id)
-      .then(deck => this.props.goToDeck(deck));
+  handleOnPress(deck) {
+    this.props.navigate({
+      routeName: 'DeckMenu',
+      params: { deck },
+    });
   }
 
   render() {
@@ -50,7 +57,7 @@ class Decks extends Component {
           data={decks}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => this.handleCardPress(item.id)}>
+            <TouchableOpacity onPress={() => this.handleOnPress(item)}>
               <Deck
                 count={item.cards.length}
                 title={item.title}

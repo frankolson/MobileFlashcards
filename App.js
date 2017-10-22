@@ -9,9 +9,9 @@ import devToolsEnhancer from 'remote-redux-devtools';
 
 // Project Assets
 import DecksContainer from './containers/DecksContainer';
+import DeckMenuContainer from './containers/DeckMenuContainer';
 import NewCardContainer from './containers/NewCardContainer';
 import NewDeckContainer from './containers/NewDeckContainer';
-import DeckMenu from './components/DeckMenu';
 import reducers from './reducers';
 import { lightGrey } from './utils/colors';
 
@@ -31,6 +31,10 @@ const Tabs = TabNavigator({
       tabBarLabel: 'New Deck',
     },
   },
+}, {
+  navigationOptions: {
+    header: null,
+  },
 });
 
 const MainNavigator = StackNavigator({
@@ -38,7 +42,7 @@ const MainNavigator = StackNavigator({
     screen: Tabs,
   },
   DeckMenu: {
-    screen: DeckMenu,
+    screen: DeckMenuContainer,
   },
   NewCard: {
     screen: NewCardContainer,

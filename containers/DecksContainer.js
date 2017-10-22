@@ -1,10 +1,11 @@
 // Vendor Assets
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 
 // Project Assets
 import Decks from '../components/Decks';
 import { receiveDecks } from '../actions';
-import { getDeck, getDecks } from '../utils/api';
+import { getDecks } from '../utils/api';
 
 const mapStateToProps = ({ decks }) => ({
   decks: Object.keys(decks || {}).map(id => ({
@@ -14,9 +15,8 @@ const mapStateToProps = ({ decks }) => ({
 });
 
 const mapDispatchToProps = (dispatch, { navigation }) => ({
-  getDeck,
   getDecks,
-  goToDeck: data => navigation.navigate('DeckMenu', data),
+  navigate: data => navigation.dispatch(NavigationActions.navigate(data)),
   receiveDecks: data => dispatch(receiveDecks(data)),
 });
 
