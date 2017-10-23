@@ -1,7 +1,12 @@
 // Vendor Assets
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+// Project Assets
+import Answer from './Answer';
+import Question from './Question';
+import { black } from '../utils/colors';
 
 const propTypes = {
   deck: PropTypes.shape({
@@ -15,6 +20,23 @@ const propTypes = {
   goBack: PropTypes.func.isRequired,
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  button: {
+    padding: 10,
+    alignSelf: 'center',
+    margin: 10,
+    borderColor: black,
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+  buttonText: {
+    fontSize: 20,
+  },
+});
+
 class Quiz extends Component {
   constructor(props) {
     super(props);
@@ -22,11 +44,14 @@ class Quiz extends Component {
     this.state = {
       currentCardPosition: 0,
       score: 0,
+      viewingQuestion: true,
     };
 
     this.handleCorrect = this.handleCorrect.bind(this);
     this.handleIncorrect = this.handleIncorrect.bind(this);
     this.leaveQuiz = this.leaveQuiz.bind(this);
+    this.resetQuiz = this.resetQuiz.bind(this);
+    this.toggleQuestion = this.toggleQuestion.bind(this);
   }
 
   handleCorrect() {
@@ -54,10 +79,22 @@ class Quiz extends Component {
     });
   }
 
+  toggleQuestion() {
+    this.setState({
+      viewingQuestion: !this.state.viewingQuestion,
+    });
+  }
+
   render() {
+    const card = this.props.deck.cards[this.state.currentCardPosition];
+
     return (
-      <View>
-        <Text>Quiz time</Text>
+      <View style={styles.container}>
+        {this.state.viewingQuestion ? (
+          <Question question={card.question} viewAnswer={this.toggleQuestion} />
+        ) : (
+          <Answer answer={card.answer} viewQuestion={this.toggleQuestion} />
+        )}
       </View>
     );
   }
