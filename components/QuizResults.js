@@ -52,7 +52,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const Deck = ({ leaveQuiz, numCards, resetQuiz, score }) => (
+const Deck = ({
+  leaveQuiz, numCards, resetQuiz, score,
+}) => (
   <View style={styles.container}>
     <View style={styles.scoreContainer}>
       <Text style={styles.text}>Your quiz results:</Text>
