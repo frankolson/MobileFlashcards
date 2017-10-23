@@ -6,6 +6,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 // Project Assets
 import Answer from './Answer';
 import Question from './Question';
+import QuizResults from './QuizResults';
 import { black } from '../utils/colors';
 
 const propTypes = {
@@ -21,9 +22,6 @@ const propTypes = {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   button: {
     padding: 10,
     alignSelf: 'center',
@@ -40,6 +38,9 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 20,
+  },
+  container: {
+    flex: 1,
   },
 });
 
@@ -96,6 +97,17 @@ class Quiz extends Component {
     const { cards } = this.props.deck;
     const card = cards[currentCardPosition];
 
+    if (currentCardPosition === cards.length) {
+      return (
+        <QuizResults
+          leaveQuiz={this.leaveQuiz}
+          numCards={cards.length}
+          resetQuiz={this.resetQuiz}
+          score={this.state.score}
+        />
+      );
+    }
+
     return (
       <View style={styles.container}>
         <Text>{`${currentCardPosition + 1}/${cards.length}`}</Text>
@@ -108,7 +120,7 @@ class Quiz extends Component {
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            onPress={this.handleCorrect}
+            onPress={this.handleIncorrect}
             style={styles.button}
           >
             <Text style={styles.buttonText}>Incorrect</Text>
