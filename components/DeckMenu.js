@@ -55,7 +55,13 @@ class DeckMenu extends Component {
   }
 
   handleStart() {
-    console.log(this.props.deck.title);
+    this.props.navigate({
+      routeName: 'Quiz',
+      params: {
+        deck: this.props.deck,
+        title: `Quiz: ${this.props.deck.title}`,
+      },
+    });
   }
 
   render() {
@@ -72,7 +78,7 @@ class DeckMenu extends Component {
           onPress={this.handleStart}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>start</Text>
+          <Text style={styles.buttonText}>Start Quiz</Text>
         </TouchableOpacity>
 
         <TouchableOpacity

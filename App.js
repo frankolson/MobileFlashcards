@@ -12,6 +12,7 @@ import DecksContainer from './containers/DecksContainer';
 import DeckMenuContainer from './containers/DeckMenuContainer';
 import NewCardContainer from './containers/NewCardContainer';
 import NewDeckContainer from './containers/NewDeckContainer';
+import QuizContainer from './containers/QuizContainer';
 import reducers from './reducers';
 import { lightGrey } from './utils/colors';
 
@@ -46,6 +47,9 @@ const MainNavigator = StackNavigator({
   },
   NewCard: {
     screen: NewCardContainer,
+  },
+  Quiz: {
+    screen: QuizContainer,
   },
 });
 
