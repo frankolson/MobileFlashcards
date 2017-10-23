@@ -31,6 +31,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
   },
+  buttonDisabled: {
+    padding: 10,
+    alignSelf: 'center',
+    margin: 10,
+    borderColor: black,
+    borderWidth: 1,
+    borderRadius: 5,
+    opacity: 0.5,
+  },
   buttonText: {
     fontSize: 20,
   },
@@ -66,6 +75,7 @@ class DeckMenu extends Component {
 
   render() {
     const { cards, title } = this.props.deck;
+    const noCards = cards.length === 0;
 
     return (
       <View style={styles.container}>
@@ -76,7 +86,8 @@ class DeckMenu extends Component {
 
         <TouchableOpacity
           onPress={this.handleStart}
-          style={styles.button}
+          style={noCards ? styles.buttonDisabled : styles.button}
+          disabled={noCards}
         >
           <Text style={styles.buttonText}>Start Quiz</Text>
         </TouchableOpacity>

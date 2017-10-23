@@ -1,7 +1,7 @@
 // Vendor Assets
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 // Project Assets
 import Answer from './Answer';
@@ -86,10 +86,13 @@ class Quiz extends Component {
   }
 
   render() {
-    const card = this.props.deck.cards[this.state.currentCardPosition];
+    const { currentCardPosition } = this.state;
+    const { cards } = this.props.deck;
+    const card = cards[currentCardPosition];
 
     return (
       <View style={styles.container}>
+        <Text>{`${currentCardPosition + 1}/${cards.length}`}</Text>
         {this.state.viewingQuestion ? (
           <Question question={card.question} viewAnswer={this.toggleQuestion} />
         ) : (
