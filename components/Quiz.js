@@ -1,7 +1,7 @@
 // Vendor Assets
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 // Project Assets
 import Answer from './Answer';
@@ -31,6 +31,12 @@ const styles = StyleSheet.create({
     borderColor: black,
     borderWidth: 1,
     borderRadius: 5,
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
     fontSize: 20,
@@ -93,11 +99,28 @@ class Quiz extends Component {
     return (
       <View style={styles.container}>
         <Text>{`${currentCardPosition + 1}/${cards.length}`}</Text>
+
         {this.state.viewingQuestion ? (
           <Question question={card.question} viewAnswer={this.toggleQuestion} />
         ) : (
           <Answer answer={card.answer} viewQuestion={this.toggleQuestion} />
         )}
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={this.handleCorrect}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Incorrect</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={this.handleCorrect}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Correct</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
