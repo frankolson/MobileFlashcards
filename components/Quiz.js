@@ -1,7 +1,9 @@
 // Vendor Assets
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Animated, StyleSheet, Text, TouchableOpacity, View,
+} from 'react-native';
 
 // Project Assets
 import Answer from './Answer';
@@ -22,6 +24,9 @@ const propTypes = {
 };
 
 const styles = StyleSheet.create({
+  animatedContainer: {
+    flex: 1,
+  },
   button: {
     padding: 10,
     alignSelf: 'center',
@@ -49,6 +54,7 @@ class Quiz extends Component {
     super(props);
 
     this.state = {
+      bounceValue: new Animated.Value(1),
       currentCardPosition: 0,
       score: 0,
       viewingQuestion: true,
@@ -62,6 +68,13 @@ class Quiz extends Component {
   }
 
   handleCorrect() {
+    const { bounceValue } = this.state;
+
+    Animated.sequence([
+      Animated.timing(bounceValue, { duration: 200, toValue: 1.04 }),
+      Animated.spring(bounceValue, { toValue: 1, friction: 4 }),
+    ]).start();
+
     this.setState({
       currentCardPosition: this.state.currentCardPosition + 1,
       score: this.state.score + 1,
@@ -69,6 +82,13 @@ class Quiz extends Component {
   }
 
   handleIncorrect() {
+    const { bounceValue } = this.state;
+
+    Animated.sequence([
+      Animated.timing(bounceValue, { duration: 200, toValue: 1.04 }),
+      Animated.spring(bounceValue, { toValue: 1, friction: 4 }),
+    ]).start();
+
     this.setState({
       currentCardPosition: this.state.currentCardPosition + 1,
     });
@@ -93,18 +113,22 @@ class Quiz extends Component {
   }
 
   render() {
-    const { currentCardPosition } = this.state;
+    const { bounceValue, currentCardPosition } = this.state;
     const { cards } = this.props.deck;
     const card = cards[currentCardPosition];
 
     if (currentCardPosition === cards.length) {
       return (
-        <QuizResults
-          leaveQuiz={this.leaveQuiz}
-          numCards={cards.length}
-          resetQuiz={this.resetQuiz}
-          score={this.state.score}
-        />
+        <Animated.View
+          style={[styles.animatedContainer, { transform: [{ scale: bounceValue }] }]}
+        >
+          <QuizResults
+            leaveQuiz={this.leaveQuiz}
+            numCards={cards.length}
+            resetQuiz={this.resetQuiz}
+            score={this.state.score}
+          />
+        </Animated.View>
       );
     }
 
@@ -112,11 +136,15 @@ class Quiz extends Component {
       <View style={styles.container}>
         <Text>{`${currentCardPosition + 1}/${cards.length}`}</Text>
 
-        {this.state.viewingQuestion ? (
-          <Question question={card.question} viewAnswer={this.toggleQuestion} />
-        ) : (
-          <Answer answer={card.answer} viewQuestion={this.toggleQuestion} />
-        )}
+        <Animated.View
+          style={[styles.animatedContainer, { transform: [{ scale: bounceValue }] }]}
+        >
+          {this.state.viewingQuestion ? (
+            <Question question={card.question} viewAnswer={this.toggleQuestion} />
+          ) : (
+            <Answer answer={card.answer} viewQuestion={this.toggleQuestion} />
+          )}
+        </Animated.View>
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity
