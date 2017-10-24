@@ -1,6 +1,6 @@
 // Vendor Assets
 import React from 'react';
-import { View, StatusBar, StyleSheet } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -42,9 +42,9 @@ const Tabs = TabNavigator({
     header: null,
   },
   tabBarOptions: {
-    activeTintColor: primary,
+    activeTintColor: Platform.OS === 'ios' ? primary : white,
     style: {
-      backgroundColor: white,
+      backgroundColor: Platform.OS === 'ios' ? white : primary,
     },
   },
 });
