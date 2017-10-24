@@ -1,6 +1,6 @@
 # MobileFlashcards:
 
-A simple app for testing your memorygit
+A simple app for testing your memory.
 
 ## Getting Started
 
