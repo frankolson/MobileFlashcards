@@ -44,12 +44,21 @@ const MainNavigator = StackNavigator({
   },
   DeckMenu: {
     screen: DeckMenuContainer,
+    navigationOptions: ({ navigation }) => ({
+      title: navigation.state.params.deck.title,
+    }),
   },
   NewCard: {
     screen: NewCardContainer,
+    navigationOptions: ({ navigation }) => ({
+      title: `New Card: ${navigation.state.params.deck.title}`,
+    }),
   },
   Quiz: {
     screen: QuizContainer,
+    navigationOptions: ({ navigation }) => ({
+      title: `Quiz: ${navigation.state.params.deck.title}`,
+    }),
   },
 });
 
